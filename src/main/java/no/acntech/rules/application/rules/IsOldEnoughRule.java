@@ -34,7 +34,7 @@ public class IsOldEnoughRule {
         success = true;
     }
 
-    boolean isSuccess(){
+    public boolean isSuccess(){
         return success;
     }
 

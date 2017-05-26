@@ -1,6 +1,6 @@
 package no.acntech.rules.application.rules.basis;
 
-public enum Sex {
+public enum Gender {
 
-    MALE, FEMALE;
+    MALE, FEMALE
 }

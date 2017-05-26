@@ -17,18 +17,33 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ValidationResourceTest {
 
     @Mock
-    ValidationService validationService;
+    private ValidationService validationService;
 
     @InjectMocks
-    ValidationResource resource;
+    private ValidationResource resource;
 
     @Test
     public void testValidationResource() {
-        //ValidationResource resource = new ValidationResource(validationService);
         when(validationService.isPersonALegalRegistree(any(), any())).thenReturn(true);
 
         assertThat(resource.isPersonLegalRegistree("1977-06-30", "male"), is(true));
         verify(validationService).isPersonALegalRegistree(any(), any());
+    }
+
+    @Test
+    public void testLegalSexResource() {
+        when(validationService.isPersonOfLegalGenderToRegisterVehicle(any())).thenReturn(true);
+
+        assertThat(resource.isPersonOfLegalGender( "male"), is(true));
+        verify(validationService).isPersonOfLegalGenderToRegisterVehicle(any());
+    }
+
+    @Test
+    public void testLegalAgeResource() {
+        when(validationService.isPersonOldEnoughToRegisterVehicle(any())).thenReturn(true);
+
+        assertThat(resource.isPersonOldEnough("1977-06-30"), is(true));
+        verify(validationService).isPersonOldEnoughToRegisterVehicle(any());
     }
 }
 

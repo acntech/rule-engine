@@ -1,39 +1,65 @@
 package no.acntech.rules.application.validation;
 
+import no.acntech.rules.application.rules.IsPersonLegalRegistreeCompositeRule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
+
+@RunWith(SpringJUnit4ClassRunner.class)
 public class ValidationServiceTest {
 
-    @Test
-    public void testOldEnoughMalePassValidation() {
-        ValidationService service = new ValidationService();
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        assertThat(service.isPersonALegalRegistree(LocalDate.of(1977, 6, 30), "male"), is(true));
+    @Mock
+    private IsPersonLegalRegistreeCompositeRule isPersonLegalRegistreeCompositeRule;
+
+    @InjectMocks
+    private ValidationService service;
+
+    @Test
+    public void testPassedCompositeValidation() {
+        when(isPersonLegalRegistreeCompositeRule.evaluate(any())).thenReturn(true);
+
+        assertThat(service.isPersonALegalRegistree(LocalDate.now().format(formatter), "male"), is(true));
     }
 
     @Test
-    public void testOldEnoughFemaleFailValidation() {
-        ValidationService service = new ValidationService();
+    public void testFailedCompositeValidation() {
+        when(isPersonLegalRegistreeCompositeRule.evaluate(any())).thenReturn(false);
+        assertThat(service.isPersonALegalRegistree(LocalDate.now().format(formatter), "female"), is(false));
+    }
 
-        assertThat(service.isPersonALegalRegistree(LocalDate.of(1977, 6, 30), "female"), is(false));
+
+    @Test
+    public void testPassedAgeValidation() {
+        assertThat(service.isPersonOldEnoughToRegisterVehicle(LocalDate.of(1970, 1, 15).format(formatter)), is(true));
     }
 
     @Test
-    public void testTooYoungFemaleFailValidation() {
-        ValidationService service = new ValidationService();
-
-        assertThat(service.isPersonALegalRegistree(LocalDate.now().minusYears(17), "female"), is(false));
+    public void testFailedAgeValidation() {
+        assertThat(service.isPersonOldEnoughToRegisterVehicle(LocalDate.of(2015, 2, 16).format(formatter)), is(false));
     }
 
     @Test
-    public void testTooYoungMaleFailValidation() {
-        ValidationService service = new ValidationService();
+    public void testPassedSexValidation() {
 
-        assertThat(service.isPersonALegalRegistree(LocalDate.now().minusYears(17), "male"), is(false));
+        assertThat(service.isPersonOfLegalGenderToRegisterVehicle("male"), is(true));
     }
+
+    @Test
+    public void testFailedSexValidation() {
+        assertThat(service.isPersonOfLegalGenderToRegisterVehicle("female"), is(false));
+    }
+
 }

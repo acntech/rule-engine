@@ -6,11 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 public class ValidationResource {
 
@@ -24,9 +19,19 @@ public class ValidationResource {
 
     @RequestMapping(path = "/legalRegistree/{birthdate}/{sex}", method = RequestMethod.GET)
     public Boolean isPersonLegalRegistree(@PathVariable String birthdate, @PathVariable String sex) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(birthdate, formatter);
 
-        return validationService.isPersonALegalRegistree(date, sex);
+        return validationService.isPersonALegalRegistree(birthdate, sex);
+    }
+
+    @RequestMapping(path = "/oldEnough/{birthdate}", method = RequestMethod.GET)
+    public Boolean isPersonOldEnough(@PathVariable String birthdate) {
+
+        return validationService.isPersonOldEnoughToRegisterVehicle(birthdate);
+    }
+
+    @RequestMapping(path = "/legalGender/{gender}", method = RequestMethod.GET)
+    public Boolean isPersonOfLegalGender(@PathVariable String gender) {
+
+        return validationService.isPersonOfLegalGenderToRegisterVehicle(gender);
     }
 }

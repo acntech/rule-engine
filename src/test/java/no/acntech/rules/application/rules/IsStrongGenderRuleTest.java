@@ -1,7 +1,7 @@
 package no.acntech.rules.application.rules;
 
 import no.acntech.rules.application.rules.basis.Person;
-import no.acntech.rules.application.rules.basis.Sex;
+import no.acntech.rules.application.rules.basis.Gender;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
@@ -19,12 +19,12 @@ public class IsStrongGenderRuleTest {
     @Before
     public void setup() {
         testPerson = new Person();
-        testPerson.setSex(Sex.MALE);
+        testPerson.setGender(Gender.MALE);
     }
 
     @Test
     public void testMalePassTheValidation(){
-        IsTheStrongGenderRule rule = new IsTheStrongGenderRule();
+        IsStrongGenderRule rule = new IsStrongGenderRule();
 
         Facts facts = new Facts();
         facts.put("person", testPerson);
@@ -45,9 +45,9 @@ public class IsStrongGenderRuleTest {
 
     @Test
     public void testFemaleFailTheValidation(){
-        IsTheStrongGenderRule rule = new IsTheStrongGenderRule();
+        IsStrongGenderRule rule = new IsStrongGenderRule();
 
-        testPerson.setSex(Sex.FEMALE);
+        testPerson.setGender(Gender.FEMALE);
 
         Facts facts = new Facts();
         facts.put("person", testPerson);

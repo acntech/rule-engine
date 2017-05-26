@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 public class Person {
 
-    private Sex sex;
+    private Gender gender;
     private LocalDate birthdate;
 
 
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public LocalDate getBirthdate() {
