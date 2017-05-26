@@ -2,7 +2,7 @@ package no.acntech.rules.application.validation;
 
 import no.acntech.rules.application.rules.IsOldEnoughRule;
 import no.acntech.rules.application.rules.IsPersonLegalRegistreeCompositeRule;
-import no.acntech.rules.application.rules.IsStrongGenderRule;
+import no.acntech.rules.application.rules.IsLegalGenderRule;
 import no.acntech.rules.application.rules.basis.Person;
 import no.acntech.rules.application.rules.basis.Gender;
 import org.jeasy.rules.api.Facts;
@@ -75,7 +75,7 @@ public class ValidationService {
      */
     boolean isPersonOfLegalGenderToRegisterVehicle(String gender){
 
-        IsStrongGenderRule isStrongGenderRule = new IsStrongGenderRule();
+        IsLegalGenderRule isLegalGenderRule = new IsLegalGenderRule();
         Person person = new Person();
         parseAndInsertGenderString(gender, person);
 
@@ -83,7 +83,7 @@ public class ValidationService {
         facts.put("person", person);
 
         Rules rules = new Rules();
-        rules.register(isStrongGenderRule);
+        rules.register(isLegalGenderRule);
 
         RulesEngine rulesEngine = aNewRulesEngine()
                 .withSkipOnFirstFailedRule(true)
@@ -91,7 +91,7 @@ public class ValidationService {
                 .build();
         rulesEngine.fire(rules, facts);
 
-        return isStrongGenderRule.isSuccess();
+        return isLegalGenderRule.isSuccess();
     }
 
     private void parseAndInsertGenderString(final String text, Person person) {

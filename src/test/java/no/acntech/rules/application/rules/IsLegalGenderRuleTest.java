@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.jeasy.rules.core.RulesEngineBuilder.aNewRulesEngine;
 
-public class IsStrongGenderRuleTest {
+public class IsLegalGenderRuleTest {
 
     private Person testPerson;
 
@@ -24,7 +24,7 @@ public class IsStrongGenderRuleTest {
 
     @Test
     public void testMalePassTheValidation(){
-        IsStrongGenderRule rule = new IsStrongGenderRule();
+        IsLegalGenderRule rule = new IsLegalGenderRule();
 
         Facts facts = new Facts();
         facts.put("person", testPerson);
@@ -45,7 +45,7 @@ public class IsStrongGenderRuleTest {
 
     @Test
     public void testFemaleFailTheValidation(){
-        IsStrongGenderRule rule = new IsStrongGenderRule();
+        IsLegalGenderRule rule = new IsLegalGenderRule();
 
         testPerson.setGender(Gender.FEMALE);
 

@@ -18,7 +18,7 @@ public class IsPersonLegalRegistreeCompositeRule extends CompositeRule {
     public IsPersonLegalRegistreeCompositeRule() {
         super("IsPersonLegalRegistreeCompositeRule", "Composite of rules deciding if a person is a legal registree");
         addRule(new IsOldEnoughRule());
-        addRule(new IsStrongGenderRule());
+        addRule(new IsLegalGenderRule());
     }
 
     public boolean evaluate(Facts facts) {

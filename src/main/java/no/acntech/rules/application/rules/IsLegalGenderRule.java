@@ -9,10 +9,10 @@ import org.jeasy.rules.annotation.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Rule(name = "IsStrongGenderRule", description = "Checks if the person is of the strong gender")
-public class IsStrongGenderRule {
+@Rule(name = "IsLegalGenderRule", description = "Checks if the person is of the strong gender")
+public class IsLegalGenderRule {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(IsStrongGenderRule.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(IsLegalGenderRule.class);
 
     private boolean success = false;
 
@@ -21,7 +21,7 @@ public class IsStrongGenderRule {
 
         LOGGER.debug("Evaluates using Gender: {}", person.getGender());
 
-        if(isOfLegalSex(person.getGender())) {
+        if(isOfLegalGender(person.getGender())) {
             LOGGER.debug("Evaluated: true");
             return true;
         }
@@ -39,7 +39,7 @@ public class IsStrongGenderRule {
         return success;
     }
 
-    private boolean isOfLegalSex(Gender gender) {
+    private boolean isOfLegalGender(Gender gender) {
         return Gender.MALE.equals(gender);
     }
 

@@ -27,7 +27,7 @@ public class IsPersonLegalRegistreeCompositeRuleTest {
     public void testMaleAndOldEnoughPassTheValidation(){
 
         IsOldEnoughRule oldEnoughRule = new IsOldEnoughRule();
-        IsStrongGenderRule strongGenderRule = new IsStrongGenderRule();
+        IsLegalGenderRule strongGenderRule = new IsLegalGenderRule();
 
         IsPersonLegalRegistreeCompositeRule isPersonLegalRegistreeCompositeRule =
                 new IsPersonLegalRegistreeCompositeRule();
@@ -47,7 +47,7 @@ public class IsPersonLegalRegistreeCompositeRuleTest {
     public void testFemaleAndOldEnoughFailTheValidation(){
 
         IsOldEnoughRule oldEnoughRule = new IsOldEnoughRule();
-        IsStrongGenderRule strongGenderRule = new IsStrongGenderRule();
+        IsLegalGenderRule strongGenderRule = new IsLegalGenderRule();
 
         IsPersonLegalRegistreeCompositeRule isPersonLegalRegistreeCompositeRule =
                 new IsPersonLegalRegistreeCompositeRule();
@@ -68,7 +68,7 @@ public class IsPersonLegalRegistreeCompositeRuleTest {
     public void testFemaleAndToYoungFailTheValidation(){
 
         IsOldEnoughRule oldEnoughRule = new IsOldEnoughRule();
-        IsStrongGenderRule strongGenderRule = new IsStrongGenderRule();
+        IsLegalGenderRule strongGenderRule = new IsLegalGenderRule();
 
         IsPersonLegalRegistreeCompositeRule isPersonLegalRegistreeCompositeRule =
                 new IsPersonLegalRegistreeCompositeRule();
@@ -90,7 +90,7 @@ public class IsPersonLegalRegistreeCompositeRuleTest {
     public void testMaleAndToYoungFailTheValidation(){
 
         IsOldEnoughRule oldEnoughRule = new IsOldEnoughRule();
-        IsStrongGenderRule strongGenderRule = new IsStrongGenderRule();
+        IsLegalGenderRule strongGenderRule = new IsLegalGenderRule();
 
         IsPersonLegalRegistreeCompositeRule isPersonLegalRegistreeCompositeRule =
                 new IsPersonLegalRegistreeCompositeRule();
